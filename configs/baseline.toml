@@ -1,0 +1,55 @@
+# Specification only: no training or signal processing is implemented in Step 1.
+# Preserve both source configurations until the data inspection milestone.
+[project]
+name = "Real-Time Epileptic Seizure Prediction"
+stage = "setup"
+random_seed = 42
+
+[data]
+dataset = "CHB-MIT"
+initial_subject = "chb01"
+raw_directory = "data/raw"
+processed_directory = "data/processed"
+# Read actual sampling rate and channel names from each EDF, never assume them.
+
+[windowing]
+window_seconds = 10
+stride_seconds = 5
+preictal_seconds = 600
+# Ictal/postictal exclusions and boundary policy must be settled before labeling.
+
+[preprocessing]
+profile = "team_repository"
+reference_policy = "pending_montage_review"
+
+[preprocessing.profiles.team_repository]
+low_hz = 0.5
+high_hz = 40.0
+notch_hz = 50.0
+
+[preprocessing.profiles.chat_and_sample_slides]
+low_hz = 0.5
+high_hz = 50.0
+notch_hz = 60.0
+
+[features]
+# Exact source feature order. These are mean PSD values, not integrated power.
+per_channel = ["mean", "std", "variance", "delta_mean_psd", "theta_mean_psd", "alpha_mean_psd", "beta_mean_psd"]
+# 161 features follows ONLY when 23 channels are selected consistently.
+
+[model]
+algorithm = "logistic_regression"
+scaler = "standard"
+class_weight = "balanced"
+max_iter = 1000
+
+[evaluation]
+# Historical configuration for comparison, not the primary generalization claim.
+legacy_test_fraction = 0.2
+legacy_threshold = 0.4
+primary_split = "recording_grouped"
+# Tune thresholds on validation data only; reserve a held-out test set.
+
+[intensity]
+status = "planned"
+interpretation = "experimental_signal_intensity_not_clinical_severity"

@@ -1,0 +1,31 @@
+# Python and local tools
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+# Data, fitted models and generated reports remain local.
+data/**
+!data/**/
+!data/**/.gitkeep
+models/**
+!models/.gitkeep
+reports/**
+!reports/**/
+!reports/**/.gitkeep
+*.edf
+*.EDF
+*.fif
+*.npy
+*.npz
+*.joblib
+*.pkl
+.DS_Store
+Thumbs.db
