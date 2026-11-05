@@ -31,8 +31,8 @@ python -m streamlit run app/streamlit_app.py --server.address 127.0.0.1
 
 Training downloads the additional recordings. Data, feature archives, models
 and generated reports are excluded from Git. Network access is needed to
-recreate those artifacts. The published repository currently contains the
-initial setup commit. Subsequent development is local pending a further commit.
+recreate those artifacts. The baseline and demo were published in commit 0342d41. See CHANGELOG.md for
+subsequent improvements awaiting review.
 
 ## Explain the project in one minute
 
@@ -47,6 +47,9 @@ Streamlit shows model scores alongside EEG traces and an experimental relative
 amplitude measure.
 
 ## Defend the actual results
+
+These are historical baseline results. Recordings 18 and 20 later became
+development data; they are no longer an untouched holdout.
 
 | Test measurement | Value |
 | --- | --- |

@@ -21,6 +21,8 @@ def main(files=SAMPLE_FILES, output="chb01_features.npz"):
     profile = prep["profile"]
     filters = prep["profiles"][profile]
     settings = config["windowing"]
+    if prep["reference_policy"] != "original_bipolar":
+        raise ValueError("Reference method requires an explicitly implemented and verified policy")
     features, targets, starts, recordings = [], [], [], []
     channels = None
     for relative in files:

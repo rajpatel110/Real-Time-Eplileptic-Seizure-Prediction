@@ -1,8 +1,8 @@
-# Specification only: no training or signal processing is implemented in Step 1.
+# Preprocessing settings used by feature building and historical experiments.
 # Preserve both source configurations until the data inspection milestone.
 [project]
 name = "Real-Time Epileptic Seizure Prediction"
-stage = "feature_extraction"
+stage = "offline_research_demo"
 random_seed = 42
 
 [data]
@@ -19,7 +19,7 @@ preictal_seconds = 600
 postictal_seconds = 600
 
 [preprocessing]
-profile = "team_repository"
+profile = "chat_and_sample_slides"
 reference_policy = "original_bipolar"
 
 [preprocessing.profiles.team_repository]
@@ -51,5 +51,5 @@ primary_split = "recording_grouped"
 # Tune thresholds on validation data only; reserve a held-out test set.
 
 [intensity]
-status = "planned"
+status = "experimental_rms_implemented"
 interpretation = "experimental_signal_intensity_not_clinical_severity"

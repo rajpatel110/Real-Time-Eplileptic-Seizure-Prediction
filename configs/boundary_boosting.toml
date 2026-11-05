@@ -1,0 +1,20 @@
+schema_version = 1
+archive = "../data/processed/chb01_boundary_v1.npz"
+seed = 42
+patient_independent = false
+
+[model]
+transform = "raw"
+algorithm = "hist_gradient_boosting"
+max_iter = 150
+max_leaf_nodes = 15
+l2_regularization = 1.0
+
+[selection]
+min_precision = 0.5
+min_recall = 0.5
+
+[splits]
+train = ["chb01_01.edf", "chb01_03.edf", "chb01_04.edf", "chb01_08.edf", "chb01_16.edf"]
+validation = ["chb01_15.edf", "chb01_18.edf", "chb01_20.edf"]
+test = ["chb01_26.edf", "chb01_32.edf"]

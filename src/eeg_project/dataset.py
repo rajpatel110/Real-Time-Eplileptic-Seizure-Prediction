@@ -34,10 +34,17 @@ def sha256_file(path: Path) -> str:
 
 
 def download_sample(raw_dir: Path, files=None) -> list[Path]:
-    """Download only three approved sample files; never replace corrupt originals."""
+    """Download checksum-verified files beneath raw_dir; preserve corrupt originals."""
     paths = []
     for relative, checksum in (SAMPLE_FILES if files is None else files).items():
-        target = raw_dir / relative
+        if not re.fullmatch(r"chb[0-9]+/[A-Za-z0-9_.-]+", relative):
+            raise ValueError(f"Unsafe dataset path: {relative}")
+        if not re.fullmatch(r"[0-9a-f]{64}", checksum):
+            raise ValueError(f"Invalid SHA256 for {relative}")
+        target = Path(raw_dir) / relative
+        base = Path(raw_dir).resolve()
+        if not target.resolve().is_relative_to(base) or not target.with_suffix(target.suffix + ".part").resolve().is_relative_to(base):
+            raise ValueError(f"Dataset path escapes raw directory: {relative}")
         if target.exists():
             if sha256_file(target) != checksum:
                 raise ValueError(f"Checksum mismatch in existing file: {target}. Move it aside before retrying.")

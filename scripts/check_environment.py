@@ -40,7 +40,7 @@ def main() -> int:
         profile = config["preprocessing"]["profile"]
         filters = config["preprocessing"]["profiles"][profile]
         print(f"Configuration: {profile} ({filters['low_hz']}-{filters['high_hz']} Hz)")
-        for directory in ("data/raw", "data/interim", "data/processed", "models", "reports/figures", "notebooks", "tests", "app"):
+        for directory in ("data/raw", "data/interim", "data/processed", "models", "reports/figures", "tests", "app"):
             if not (ROOT / directory).is_dir():
                 errors.append(f"Missing directory: {directory}")
     except (OSError, KeyError, tomllib.TOMLDecodeError) as exc:

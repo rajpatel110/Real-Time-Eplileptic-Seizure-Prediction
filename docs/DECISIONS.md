@@ -38,3 +38,20 @@ The main presentation reports TN=244, FP=20, FN=2 and TP=22 for 288 test windows
 ## Step 2 observations
 
 The real-data inspection and source citations are recorded in STEP_2_DATA.md. The official summary resolves the missing annotation source. Two identical T8-P8 traces require an explicit channel-selection decision in Step 3. Only one seizure is in the initial sample, so more events are required before independent train/validation/test evaluation.
+
+## Current user specification (2026-11-05)
+
+The user explicitly restricted forward work to the supplied stack and Logistic
+Regression. The active filter profile is now chat_and_sample_slides: 0.5-50 Hz
+band-pass and 60 Hz notch. The experiment runner rejects other algorithms.
+Earlier tree experiments are historical only and are not used going forward.
+Existing fitted model artifacts retain their original embedded preprocessing;
+changing TOML alone does not migrate an already trained model.
+
+Channel/reference agreement is pending: inspected data has bipolar pairs and an
+identical duplicate, while the supplied description says 23 channels and average
+referencing. No new training should claim full agreement until this is resolved.
+
+The user subsequently approved retaining the 22 distinct bipolar channels
+(154 features). The active specification uses this reference/channel policy
+with the 0.5-50 Hz band-pass and 60 Hz notch. Average referencing is not applied.

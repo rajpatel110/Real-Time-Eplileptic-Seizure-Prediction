@@ -27,8 +27,10 @@ def main():
         configuration = json.loads(data["configuration"].item())
     masks = {key: np.isin(recording, [f"chb01_{i:02d}.edf" for i in ids]) for key, ids in SPLITS.items()}
     train, validation, test = (masks[key] for key in SPLITS)
-    assert np.all(sum(masks.values()) == 1)
-    assert all(len(np.unique(y[mask])) == 2 for mask in masks.values())
+    if not np.all(sum(masks.values()) == 1):
+        raise ValueError("Every window must belong to exactly one split")
+    if not all(len(np.unique(y[mask])) == 2 for mask in masks.values()):
+        raise ValueError("Each expanded split must contain both classes")
     candidates, models = [], []
     for strength in (.001, .01, .1, 1):
         model = make_pipeline(StandardScaler(), LogisticRegression(C=strength, class_weight="balanced", max_iter=3000, random_state=42))
