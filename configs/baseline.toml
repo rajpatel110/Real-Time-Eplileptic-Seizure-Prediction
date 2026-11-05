@@ -2,7 +2,7 @@
 # Preserve both source configurations until the data inspection milestone.
 [project]
 name = "Real-Time Epileptic Seizure Prediction"
-stage = "setup"
+stage = "feature_extraction"
 random_seed = 42
 
 [data]
@@ -16,11 +16,11 @@ processed_directory = "data/processed"
 window_seconds = 10
 stride_seconds = 5
 preictal_seconds = 600
-# Ictal/postictal exclusions and boundary policy must be settled before labeling.
+postictal_seconds = 600
 
 [preprocessing]
 profile = "team_repository"
-reference_policy = "pending_montage_review"
+reference_policy = "original_bipolar"
 
 [preprocessing.profiles.team_repository]
 low_hz = 0.5

@@ -2,7 +2,7 @@
 
 Final-year team project using CHB-MIT EEG recordings and a feature-based machine learning pipeline. We build and verify one milestone at a time.
 
-**Current milestone: Step 1, environment and project setup.** No EEG processing, prediction, intensity scoring or user interface has been implemented yet. No measured model performance is claimed.
+**Current milestone: local baseline and demo implemented.** The pipeline, recording-separated evaluation, experimental amplitude measure and Streamlit explorer are available. Held-out precision is 10.9% at the selected threshold, so prediction quality remains an open research task. See [handoff and viva guide](docs/HANDOFF.md) for results, commands and verification boundaries.
 
 ## Open the correct folder
 
@@ -77,3 +77,13 @@ The primary evaluation will separate recordings across training, validation and 
 - Streamlit: https://docs.streamlit.io/
 
 This repository is a new implementation informed by the team baseline, presentations and discussion. Contributions and experimental results should be documented as work is completed.
+
+## Step 2: download and inspect real EEG
+
+```bash
+python scripts/download_sample.py
+python scripts/inspect_sample.py
+python -m unittest discover -s tests -v
+```
+
+This downloads two CHB-MIT recordings and official annotations (about 81 MiB), verifies checksums and creates raw EEG plots plus a metadata report. Data and generated outputs remain local. See [Step 2 findings](docs/STEP_2_DATA.md), including the duplicate channel and the limits of this small sample.
